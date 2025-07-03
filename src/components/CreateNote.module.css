@@ -1,0 +1,15 @@
+.create {
+  width: 900px;
+  height: 500px;
+  background-color: #2a2b2ba4;
+  position: absolute;
+  top: calc(50% - 250px);
+  left: calc(50% - 450px);
+}
+.createPage {
+  background-color: rgba(58, 57, 57, 0.945);
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  z-index: 50;
+}
