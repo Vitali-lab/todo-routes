@@ -14,18 +14,17 @@ import { Search } from './components/Search';
 
 function App() {
 
-  const [isMenuOpen , setIsMenuOpen] = useState(true)
+  const [isMenuOpen , setIsMenuOpen] = useState(false)
  
 
   return (
     <>
     <div className='mainPage'>
-    
        <div className={`${isMenuOpen? 'leftMenuOpen': 'leftMenuClose'}`}>
         <ul className='menuList'>
-          <li><NavLink to={'/'}>Главная <FaHome/></NavLink></li>
-          <li><><NavLink to={'/notes'}>Заметки <FaStickyNote/></NavLink></></li>
-          <li className='search'><NavLink to={'/search'}>Поиск <FaSearch/></NavLink></li>
+          <li><NavLink to={'/'}>{isMenuOpen?'Главная':''} <FaHome className={isMenuOpen?'iconHome':'iconHomeClose'}/></NavLink></li>
+          <li><><NavLink to={'/notes'}>{isMenuOpen?'Заметки':''} <FaStickyNote className={isMenuOpen?'iconNote':'iconNoteClose'}/></NavLink></></li>
+          <li className='search'><NavLink to={'/search'}>{isMenuOpen?'Поиск': ''} <FaSearch className={isMenuOpen?'iconSearch':'iconSearchClose'} /></NavLink></li>
           <li></li>
         </ul>
         <button className={`${isMenuOpen? 'buttonOpenMenu': 'buttonCloseMenu'}`} onClick={()=>{setIsMenuOpen(!isMenuOpen)}}><RxHamburgerMenu/></button>

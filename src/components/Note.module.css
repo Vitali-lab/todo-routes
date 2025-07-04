@@ -4,8 +4,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(48, 48, 48, 0.884);
-  position: relative;
+  background-color: rgb(48, 48, 48);
   z-index: 50;
 }
 .note {
