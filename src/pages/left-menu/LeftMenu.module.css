@@ -13,7 +13,7 @@
   width: 300px;
   min-height: 100vh;
   border-right: 2px solid #505050;
-  background-color: #2a2b2ba4;
+  background-color: #2a2b2b;
   z-index: 100;
   transition: all 0.4s linear;
 }
@@ -50,6 +50,7 @@
   text-decoration: none;
   transition: transform 0.2s linear;
 }
+
 .menuList a:hover {
   color: white;
   transform: translateY(-2px);

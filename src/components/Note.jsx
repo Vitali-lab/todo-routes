@@ -1,13 +1,13 @@
 
 import { useNavigate, useParams } from "react-router-dom"
 import styles from './Note.module.css'
-import { useEffect, useState,useContext } from "react"
+import { useEffect, useState } from "react"
 import { FaArrowLeft } from "react-icons/fa6";
 import { useDeleteNote } from "./hooks/use-delete-note";
 import { MdDeleteOutline } from "react-icons/md";
-import { NotesContext } from "./NotesContext";
 import { RiExchangeLine } from "react-icons/ri";
 import { useChangeNote } from "./hooks/use-chage-note";
+
 
 export const Note = () => {
 
@@ -15,8 +15,8 @@ export const Note = () => {
     const [note , setNote] = useState([])
     const [noteChange , setNoteChange] = useState(false)
     const [changeInput , setChangeInput] = useState('')
-    const { setUpdateNotes } = useContext(NotesContext)
     const { changeNote } = useChangeNote()
+    const { delNote } = useDeleteNote()
     const navigate = useNavigate()
     
     useEffect(()=>{
@@ -26,8 +26,9 @@ export const Note = () => {
             result.map((el) => Number(el.id) === Number(id)? setNote(el) : '')
         } )
     },[])
+    
          
-   const { delNote } = useDeleteNote()
+  
    console.log(changeInput);
    
         
@@ -43,15 +44,15 @@ export const Note = () => {
              {noteChange && <div className={styles.change}>
                 <input className={styles.changeInput} value={changeInput} type="text" onChange={({target})=>{setChangeInput(target.value)}} />
                 <button className={styles.changeButton} onClick={()=>{
-                    changeNote(changeInput, setUpdateNotes,id)
+                    changeNote(changeInput,id)
                     navigate('/notes')
                     }}>Изменить</button>
              </div>}
              <div className={styles.buttons}>
                 <button onClick={()=>{
-                    delNote(id,setUpdateNotes)
+                    delNote(id)
                     navigate('/notes')
-                    }}><MdDeleteOutline /></button>
+                    }}><MdDeleteOutline /> </button>
                     <button onClick={()=>{setNoteChange(!noteChange)}}><RiExchangeLine /></button>
              </div>
             </div>

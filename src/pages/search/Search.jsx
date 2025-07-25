@@ -29,7 +29,7 @@ export const Search = () => {
     },[searchInput])
 
     return(
-        <>
+        <div className={styles.container}>
         <Outlet />
         <h3 className={styles.title}>Поиск</h3>
         <div>
@@ -54,6 +54,6 @@ export const Search = () => {
            })}
         </div>
         
-        </>
+        </div>
     )
 }
