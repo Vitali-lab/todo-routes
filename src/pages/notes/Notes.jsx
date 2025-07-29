@@ -1,35 +1,41 @@
-import { useEffect, useState,  } from "react"
+import { useEffect  } from "react"
 import  styles  from './Notes.module.css'
 import {  Outlet, useNavigate, Link, } from "react-router-dom"
 import { FaStickyNote , FaRegEnvelopeOpen    } from "react-icons/fa";
-import { AddNoteButton } from "../../components/buttons/AddNoteButton";
+import { AddNoteButton } from "../../buttons/AddNoteButton";
 import { MdDeleteOutline } from "react-icons/md";
-import { useDeleteNote } from "../../components/hooks/use-delete-note";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchNotes } from "../../actions/notes-loading-action";
+import { getNotes } from "../../selectors/notes";
 import { updateNotesSelector } from '../../selectors/update-notes';
+import { deleteNote } from "../../actions/delete-note";
+import { Loader } from "../../components/Loader";
 
 export const Notes = ( ) => {
 
     
-    const [notes , setNotes] = useState([])
  
-   
-    const { delNote } = useDeleteNote()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const notes = useSelector(getNotes)
     const updateNotes = useSelector(updateNotesSelector)
+    const loading = useSelector(state => state.loading)
+    
 
 
     useEffect(()=>{
-        fetch("http://localhost:3000/notes")
-        .then((loadedNotes)=> loadedNotes.json())
-        .then((result) => {
-            setNotes(result)
-        })
+    dispatch(fetchNotes())
     },[updateNotes])
 
+    
+
+   const deleteCurrentNote = (id)=> {
+    dispatch(deleteNote(id))
+    dispatch({ type: "UPDATE_NOTES", payload: !updateNotes });
+   }
    
    
-   
+   if(loading) return <Loader />
     
 
     return(
@@ -54,9 +60,7 @@ export const Notes = ( ) => {
                     </span>
                     <div className={styles.buttons}>
                     <Link to={`note/${id}`}><button><FaRegEnvelopeOpen /></button></Link>
-                    <button onClick={()=>{
-                        delNote(id)
-                        }}><MdDeleteOutline /></button>
+                    <button onClick={()=>{deleteCurrentNote(id)}}><MdDeleteOutline /></button>
                     </div>
                     <input className={styles.checkbox} type="checkbox"  />
 

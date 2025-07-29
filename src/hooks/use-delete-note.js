@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateNotesSelector } from "../../selectors/update-notes";
+import { updateNotesSelector } from "../selectors/update-notes";
 
 export const useDeleteNote = () => {
   const dispatch = useDispatch();
